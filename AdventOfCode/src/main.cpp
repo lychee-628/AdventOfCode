@@ -7,13 +7,15 @@
 #include <string>
 
 #include "Year2024/Day1.h"
+#include "Year2024/Day2.h"
 
 
-#define MAX_DAY_IMPLEMENTED 1
+#define MAX_DAY_IMPLEMENTED 2
 
 const std::array<DayBase*, MAX_DAY_IMPLEMENTED> days =
 {
-    new Day<1>()
+    new Day<1>(),
+    new Day<2>()
 };
 
 std::string GetFileName(const char* _prefix, int _day)
@@ -55,7 +57,8 @@ void RunDay(int _day, bool _runExample=false)
     if (_runExample)
     {
         std::cout << "\n\nEXAMPLE : \n";
-        RunDayImpl("res/Example", _day);
+        RunDayImpl("res/Example", _day);    
+        return; //Imagine running example AND full day, such that the results add up and you get a wrong answer...
     }
 
     std::cout << "\n\nCODE OUTPUT : \n";
@@ -65,7 +68,7 @@ void RunDay(int _day, bool _runExample=false)
 int main()
 {
 
-    bool runExample = true;
+    bool runExample = false;
     bool runEverything = false;
 
     if (runEverything)

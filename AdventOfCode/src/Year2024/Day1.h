@@ -17,7 +17,6 @@ public:
     {
         std::string line;
 
-
         const char* DELEMITER = "   ";
         const size_t DELEMITER_SIZE = 3;
 
