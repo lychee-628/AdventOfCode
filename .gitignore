@@ -3,4 +3,8 @@ x64/
 
 *.sln
 *.vcxproj*
+
+bin/
+bin-int/
+
 premake5

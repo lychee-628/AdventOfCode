@@ -9,15 +9,17 @@
 #include "Year2024/Day1.h"
 #include "Year2024/Day2.h"
 #include "Year2024/Day3.h"
+#include "Year2024/Day4.h"
 
 
-#define MAX_DAY_IMPLEMENTED 3
+#define MAX_DAY_IMPLEMENTED 4
 
 const std::array<DayBase*, MAX_DAY_IMPLEMENTED> days =
 {
     new Day<1>(),
     new Day<2>(),
-    new Day<3>()
+    new Day<3>(),
+    new Day<4>()
 };
 
 std::string GetFileName(const char* _prefix, int _day)
