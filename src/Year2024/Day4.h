@@ -52,6 +52,7 @@ private:
             }
             catch(const std::exception& e)
             {
+                (void)e;
                 return false;
             }
 
@@ -77,7 +78,7 @@ private:
         return res;
     }
 
-    int ProcessInput1() override
+    size_t ProcessInput1() override
     {
         int sum = 0;
         for (Coord& c : m_XCoords)
@@ -106,7 +107,7 @@ private:
         return nbMas >= 2;
     }
 
-    int ProcessInput2() override
+    size_t ProcessInput2() override
     {
         int sum = 0;
         for (Coord& c : m_ACoords)

@@ -16,14 +16,14 @@ public:
 private:
 
     virtual void ParseInput(std::ifstream& _input) = 0;
-    virtual int  ProcessInput1() = 0;
-    virtual int  ProcessInput2() = 0;
+    virtual size_t  ProcessInput1() = 0;
+    virtual size_t  ProcessInput2() = 0;
 };
 
 template <int D>
 class Day
 {
     void ParseInput(std::ifstream& _input);
-    int  ProcessInput1() override;
-    int  ProcessInput2() override;
+    size_t  ProcessInput1() override;
+    size_t  ProcessInput2() override;
 };

@@ -4,11 +4,13 @@ workspace "AdventOfCode"
 
     project "AdventOfCode"
         language "C++"
+        cppdialect "C++20"
         kind "ConsoleApp"
-        location "AdventOfCode"
 
         targetdir ("bin/")
         objdir ("bin-int/")
+        
+        optimize "speed"
 
         files
         {

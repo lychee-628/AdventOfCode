@@ -34,7 +34,7 @@ public:
         std::sort(m_rightNumbers.begin(), m_rightNumbers.end());
     }
 
-    int ProcessInput1()
+    size_t ProcessInput1()
     {
         int sum = 0;
         for (int i = 0; i < m_leftNumbers.size(); ++i)
@@ -44,7 +44,7 @@ public:
         return sum;
     }
 
-    int ProcessInput2()
+    size_t ProcessInput2()
     {
         int sum = 0;
 

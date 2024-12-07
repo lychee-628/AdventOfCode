@@ -70,7 +70,7 @@ public:
 		return true;
 	}
 
-	int  ProcessInput1()
+	size_t  ProcessInput1()
 	{
 		int nbValid = 0;
 		for (auto& vect : m_lists)
@@ -81,7 +81,7 @@ public:
 		return nbValid;
 	}
 
-	int  ProcessInput2()
+	size_t  ProcessInput2()
 	{
 		int nbValid = 0;
 		for (auto& vect : m_lists)

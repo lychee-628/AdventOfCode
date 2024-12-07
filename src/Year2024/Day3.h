@@ -106,9 +106,9 @@ public:
         return true;
     }
 
-    int Process(bool _considerEnabled)
+    size_t Process(bool _considerEnabled)
     {
-        int sum = 0;
+        size_t sum = 0;
         for (auto&[s, enabled] : m_mulsStr)
         {
             //std::cout << "ENABLED IS " << enabled << "\n";
@@ -145,11 +145,11 @@ public:
         return sum;
     }
 
-    int  ProcessInput1() override
+    size_t  ProcessInput1() override
     {
         return Process(false);
     }
-    int  ProcessInput2() override
+    size_t  ProcessInput2() override
     {
         return Process(true);
     }
