@@ -97,7 +97,7 @@ break_loops:
         for (auto& line : m_lines)
         {
             bool ok = true;
-pls_dont_judge: //I know this is terrible practice but it fucking works and I don't give a fuck :]
+pls_dont_judge: //I know this is terrible practice but it fucking works and I don't give a shit :]
             for (auto it = line.begin(); it != line.end(); ++it)
             {
                 const std::unordered_set<size_t>& rulesSet = m_map[*it];
