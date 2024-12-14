@@ -17,9 +17,10 @@
 #include "Year2024/Day9.h"
 #include "Year2024/Day10.h"
 #include "Year2024/Day11.h"
+#include "Year2024/Day12.h"
 
 
-#define MAX_DAY_IMPLEMENTED 11
+#define MAX_DAY_IMPLEMENTED 12
 
 const std::array<DayBase*, MAX_DAY_IMPLEMENTED> days =
 {
@@ -33,7 +34,8 @@ const std::array<DayBase*, MAX_DAY_IMPLEMENTED> days =
     new Day<8>(),
     new Day<9>(),
     new Day<10>(),
-    new Day<11>()
+    new Day<11>(),
+    new Day<12>()
 };
 
 std::string GetFileName(const char* _prefix, int _day)
@@ -85,7 +87,7 @@ void RunDay(int _day, bool _runExample=false)
 
 int main()
 {
-    bool runExample = false;
+    bool runExample = true;
     bool runEverything = false;
 
     if (runEverything)
