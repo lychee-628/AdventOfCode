@@ -6,6 +6,20 @@
 #include <algorithm>
 #include <cmath>
 
+/*
+
+a = (X - X2b)/X1
+b = (YX1 - Y1X)/(Y2X1 - Y1X2)
+
+
+//
+If (YX1 - Y1X) % (Y2X1 - Y1X2) != 0, impossible
+If (X - X2b) % X1 != 0, impossible
+If a < 0 or b < 0, impossible
+
+
+*/
+
 template <>
 class Day<12> : public DayBase
 {
