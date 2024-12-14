@@ -61,13 +61,43 @@ public:
 
     struct AreaData
     {
-        size_t volume, permimeter;
+        size_t volume, permimeter, nbCorners;
 
         AreaData operator+(const AreaData& _other) const
         {
-            return {volume + _other.volume, permimeter + _other.permimeter};
+            return {volume + _other.volume, permimeter + _other.permimeter, nbCorners + _other.nbCorners};
         }
     };
+
+    bool IsCorner(const MapType& _map, Coord _pos, int _xDir, int _yDir, char _c)
+    {
+        std::array<char, 4> square = {
+            _map[_pos.y][_pos.x].c,
+            _map[_pos.y][_pos.x + _xDir].c,
+            _map[_pos.y + _yDir][_pos.x].c,
+            _map[_pos.y + _yDir][_pos.x + _xDir].c
+        };
+
+
+        size_t nbOfShape = std::count(square.begin(), square.end(), _c);
+        if (nbOfShape == 1)
+            return true;
+
+        if (nbOfShape == 4)
+            return false;
+        
+        if (nbOfShape == 3)
+        {
+            if (_map[_pos.y + _yDir][_pos.x + _xDir].c != _c)
+                return true;
+        }
+        if (nbOfShape == 2)
+        {
+            if (_map[_pos.y + _yDir][_pos.x + _xDir].c == _c)
+                return true;
+        }
+        return false;
+    }
 
     AreaData GetShapeData(Coord _pos, char _c, MapType& _map, std::vector<Coord>* _oobPos)
     {
@@ -78,21 +108,33 @@ public:
             {
                 _oobPos->push_back(_pos);
             }
-            return {0, 1}; //If oob, 0 volume but 1 perimeter
+            return {0, 1, 0}; //If oob, 0 volume but 1 perimeter
         }
         
         //If already checked, then 0 volume and 0 permieter
         if (_map.at(_pos.y).at(_pos.x).marked == true)
-            return {0, 0};
+            return {0, 0, 0};
         
 
         _map[_pos.y][_pos.x].marked = true;
 
-        return AreaData{1, 0}
-        + GetShapeData({_pos.x, _pos.y+1}, _c, _map, _oobPos)
-        + GetShapeData({_pos.x, _pos.y-1}, _c, _map, _oobPos)
-        + GetShapeData({_pos.x+1, _pos.y}, _c, _map, _oobPos)
-        + GetShapeData({_pos.x-1, _pos.y}, _c, _map, _oobPos);
+        std::array<AreaData, 4> neighbours = {
+            GetShapeData({_pos.x, _pos.y+1}, _c, _map, _oobPos), 
+            GetShapeData({_pos.x, _pos.y-1}, _c, _map, _oobPos),
+            GetShapeData({_pos.x+1, _pos.y}, _c, _map, _oobPos),
+            GetShapeData({_pos.x-1, _pos.y}, _c, _map, _oobPos)
+        };
+        
+
+        size_t nbCorners = 0;
+
+        nbCorners += IsCorner(_map, _pos, 1, 1, _c) ? 1 : 0;
+        nbCorners += IsCorner(_map, _pos, 1, -1, _c) ? 1 : 0;
+        nbCorners += IsCorner(_map, _pos, -1, 1, _c) ? 1 : 0;
+        nbCorners += IsCorner(_map, _pos, -1, -1, _c) ? 1 : 0;
+
+        
+        return AreaData{1, 0, nbCorners} + neighbours[0] + neighbours[1] + neighbours[2] + neighbours[3];
     }
 
     size_t ProcessInput1()
@@ -114,10 +156,26 @@ public:
         return res;
     }
 
-    
+    //Thanks nick42d for pointing out that number of sides == number of corners
+    //I would have never found that otherwise
     size_t ProcessInput2()
     {
-        return 0;
+        size_t res = 0;
+        MapType copy = m_map;
+
+        for (size_t y = 1; y < copy.size()-1; ++y)
+        {
+            for (size_t x = 1; x < copy[y].size()-1; ++x)
+            {
+                char chr = copy[y][x].c;
+                AreaData data = GetShapeData({x, y}, chr, copy, nullptr);
+                if (data.volume == 0)
+                    continue;
+                std::cout << " " << chr << " " << data.nbCorners << "\n";
+                res += data.nbCorners * data.volume;
+            }
+        }
+        return res;
     }
 
 private:
